@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.mapper.UserMapper">
+    <insert id="addUser" parameterType="User">
+        insert into user(username,pwd) values(#{username},#{pwd})
+    </insert>
+
+    <select id="queryUserById" parameterType="int" resultType="UserInfo">
+        select user.* ,(select count(*) from commentinfo where `user`.id=commentinfo.userid)  as count,(select count(*) from follower where followid = `user`.id) as fcount,(select count(*) from follower where followedid = `user`.id) as fdcount FROM user left join commentinfo on user.id = commentinfo.userid where id = #{value} GROUP BY id
+    </select>
+</mapper>
