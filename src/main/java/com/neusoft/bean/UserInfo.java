@@ -28,6 +28,4 @@ public class UserInfo extends User {
     public void setRescount(int rescount) {
         this.rescount = rescount;
     }
-
-
 }
